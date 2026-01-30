@@ -12,6 +12,26 @@ bot.onText(/\/start/, (msg) => {
     "🤖 Bot is ONLINE!\n\nType /menu to continue."
   );
 });
+bot.onText(/\/sol/, async (msg) => {
+  const chatId = msg.chat.id;
+
+  try {
+    const res = await axios.get(
+      "https://api.coingecko.com/api/v3/simple/price",
+      {
+        params: {
+          ids: "solana",
+          vs_currencies: "usd"
+        }
+      }
+    );
+
+    const price = res.data.solana.usd;
+    bot.sendMessage(chatId, `🟢 Solana (SOL)\n💰 Price: $${price}`);
+  } catch (err) {
+    bot.sendMessage(chatId, "❌ Failed to fetch SOL price.");
+  }
+});
 
 /* ===== MENU COMMAND ===== */
 bot.onText(/\/menu/, (msg) => {
