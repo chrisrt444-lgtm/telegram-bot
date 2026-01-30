@@ -47,7 +47,8 @@ bot.onText(/\/menu/, (msg) => {
 });
 
 /* ===== SOL PRICE (COMMAND) ===== */
-bot.onText(/\/price/, async (msg) => {
+bot.onText(/\/(price|sol)/, async (msg) => {
+
   try {
     const res = await axios.get(
       "https://api.coingecko.com/api/v3/simple/price",
